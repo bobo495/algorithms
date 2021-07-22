@@ -4,7 +4,7 @@ package pers.yibo.algorithms.fundamentals;
  * 二分查找
  *
  * @author yibo
- * @date 2021-07-22 14:45
+ * 2021-07-22 14:45
  **/
 public class BinarySearch {
     /**
