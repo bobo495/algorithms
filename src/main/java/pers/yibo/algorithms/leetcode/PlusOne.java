@@ -1,8 +1,5 @@
 package pers.yibo.algorithms.leetcode;
 
-import java.util.Arrays;
-import java.util.Collections;
-
 /**
  * 66. 加一
  * https://leetcode-cn.com/problems/plus-one/
@@ -13,30 +10,17 @@ import java.util.Collections;
 public class PlusOne {
     public int[] plusOne(int[] digits) {
 
-        digits[digits.length - 1] += 1;
-        if (digits[digits.length - 1] < 10) {
-            return digits;
-        }
-
-        int carry = 1;
-        digits[digits.length - 1] -= 10;
-
-        for (int i = digits.length - 2; i >= 0; i--) {
-            int num = digits[i] + carry;
-            if (num >= 10) {
-                carry = 1;
-                num -= 10;
-            } else {
-                carry = 0;
+        for (int i = digits.length - 1; i >= 0; i--) {
+            if (digits[i] != 9) {
+                digits[i] += 1;
+                return digits;
             }
-            digits[i] = num;
+            digits[i] = 0;
         }
-        if (carry != 0) {
-            int[] out = new int[digits.length + 1];
-            out[0] = carry;
-            System.arraycopy(digits, 0, out, 1, out.length - 1);
-            return out;
-        }
-        return digits;
+
+        int[] out = new int[digits.length + 1];
+        out[0] = 1;
+        System.arraycopy(digits, 0, out, 1, out.length - 1);
+        return out;
     }
 }
