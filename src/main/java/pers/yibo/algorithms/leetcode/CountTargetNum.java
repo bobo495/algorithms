@@ -1,6 +1,6 @@
 package pers.yibo.algorithms.leetcode;
 
-import static jdk.nashorn.internal.objects.Global.println;
+import java.util.Date;
 
 /**
  * 剑指 Offer 53 - I. 在排序数组中查找数字 I
@@ -13,67 +13,87 @@ import static jdk.nashorn.internal.objects.Global.println;
 public class CountTargetNum {
     public static int search(int[] nums, int target) {
 
-        if (nums.length == 1) {
-            return nums[0] == target ? 1 : 0;
+        if (nums.length == 0) {
+            return 0;
         }
 
-        int left = -1;
-        int right = -1;
+        int left = nums.length / 2;
+        int maxLow = 0;
+        int minHigh = nums.length - 1;
 
-        int mid = nums.length / 2;
+        while (true) {
+            if (nums[left] < target) {
 
-        while (mid > 0 && mid < nums.length - 1) {
-            if (nums[mid] > target) {
-                mid = mid / 2;
-            } else if (nums[mid] < target) {
-                mid = (mid + nums.length) / 2;
+                if (left == nums.length - 1) {
+                    return 0;
+                }
+
+                if (nums[left + 1] == target) {
+                    left += 1;
+                    break;
+                } else if (nums[left + 1] > target) {
+                    return 0;
+                } else if (nums[left + 1] < target) {
+                    maxLow = left + 1;
+                    left = (left + 1 + minHigh) / 2;
+                }
+            } else if (nums[left] == target) {
+                if (left == 0) {
+                    break;
+                } else {
+                    if (nums[left - 1] < target) {
+                        break;
+                    } else {
+                        left = (left - 1 + maxLow) / 2;
+                    }
+                }
             } else {
-                left = right = mid;
-
-                while (true) {
-
-                    int tmp = (left + 1) / 2;
-                    if (nums[tmp] != target) {
-                        if (nums[tmp + 1] == target) {
-                            left = tmp + 1;
-                            break;
-                        } else {
-                            left = (tmp + left) / 2;
-                        }
+                if (left == 0) {
+                    return 0;
+                } else {
+                    if (nums[left - 1] < target) {
+                        return 0;
                     } else {
-                        left = tmp / 2;
+                        minHigh = left;
+                        left = (left - 1 + maxLow) / 2;
                     }
                 }
-
-                while (right < nums.length - 1) {
-
-                    int tmp = (right + nums.length) / 2;
-                    if (nums[tmp] != target) {
-                        if (nums[tmp - 1] == target) {
-                            right = tmp;
-                            break;
-                        } else {
-                            right = (tmp - 1 + right) / 2;
-                        }
-                    } else {
-                        right = (tmp + nums.length) / 2;
-                    }
-                }
-
-                break;
             }
         }
-        if (left == -1) {
-            return 0;
-        } else {
-            return right - left;
+        int right = (left + nums.length) / 2;
+
+        while (true) {
+            if (nums[right] > target) {
+                if (nums[right - 1] == target) {
+                    return right - left;
+                } else {
+                    right = (maxLow + right) / 2;
+                }
+            } else {
+                if (right == minHigh) {
+                    return right - left + 1;
+                } else {
+                    if (nums[right + 1] > target) {
+                        return right - left + 1;
+                    } else {
+                        maxLow=right+1;
+                        right = (right + 1 + minHigh) / 2;
+                    }
+                }
+            }
         }
     }
 
     public static void main(String[] args) {
-        int[] test = {5, 7, 7, 8, 8, 10};
-        int[] test2 = {1};
-        System.out.println(search(test, 6));
-//        System.out.println(search(test2, 1));
+//        int[] test = {3, 3, 3};
+//        System.out.println(search(test, 3));
+        int[] test = new int[1000000];
+        for(int i=0;i<10;i++){
+            for(int j=0;j<100000;j++){
+                test[i*100000+j]=i;
+            }
+        }
+        System.out.println(new Date());
+        System.out.println(search(test,3));
     }
 }
