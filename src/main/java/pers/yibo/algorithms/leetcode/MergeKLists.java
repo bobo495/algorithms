@@ -43,13 +43,21 @@ public class MergeKLists {
             return null;
         }
 
-        ListNode result = null;
-        for (ListNode list : lists) {
-            result = mergeTwoList(result, list);
-            System.out.println(result);
+        ListNode left = null;
+        ListNode right = null;
+        int leftIndex = 0;
+        int rightIndex = lists.length - 1;
+        while (leftIndex < rightIndex) {
+            left = mergeTwoList(left, lists[leftIndex]);
+            right = mergeTwoList(right, lists[rightIndex]);
+            leftIndex++;
+            rightIndex--;
         }
 
-        return result;
+        if (leftIndex == rightIndex) {
+            left = mergeTwoList(left, lists[leftIndex]);
+        }
+        return mergeTwoList(left, right);
     }
 
     /**
