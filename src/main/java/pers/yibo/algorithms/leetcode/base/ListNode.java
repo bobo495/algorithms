@@ -3,8 +3,6 @@ package pers.yibo.algorithms.leetcode.base;
 /**
  * 单向链表
  *
- * 注意：不能初始化空链表
- *
  * @author yibo
  * @date 2021-10-09 10:19
  **/
@@ -23,12 +21,11 @@ public class ListNode {
         if (links.length == 0) {
             return;
         }
-        this.val = links[0];
         ListNode tmp = this;
-        for (int i = 1; i < links.length; i++) {
+        for (int link : links) {
             tmp.next = new ListNode();
             tmp = tmp.next;
-            tmp.val = links[i];
+            tmp.val = link;
         }
     }
 
@@ -41,14 +38,14 @@ public class ListNode {
     public String toString() {
         ListNode tmp = this;
         if (tmp.next == null) {
-            return "[" + tmp.val + "]";
+            return "[" + "]";
         }
         StringBuilder out = new StringBuilder();
         out.append("[");
         while (tmp.next != null) {
-            out.append(tmp.val).append(",");
             tmp = tmp.next;
+            out.append(tmp.val).append(",");
         }
-        return out.append(tmp.val).append("]").toString();
+        return out.deleteCharAt(out.length() - 1).append("]").toString();
     }
 }

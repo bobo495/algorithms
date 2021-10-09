@@ -35,9 +35,10 @@ public class RemoveNthFromEnd {
 
     public static void main(String[] args) {
         // 不能构建空链表
-        int[] links = new int[]{1, 2};
-        int n = 2;
+        int[] links = new int[]{1};
+        int n = 1;
         ListNode head = new ListNode(links);
+        System.out.println(head);
         RemoveNthFromEnd r = new RemoveNthFromEnd();
         System.out.println(r.removeNthFromEnd(head, n));
     }
