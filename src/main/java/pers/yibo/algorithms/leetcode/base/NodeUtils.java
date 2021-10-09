@@ -11,13 +11,23 @@ public class NodeUtils {
         if (links.length == 0) {
             return null;
         }
-        ListNode head = new ListNode();
+        ListNode head = new ListNode(links[0]);
         ListNode tmp = head;
-        for (int link : links) {
-            tmp.next = new ListNode();
+        for (int i = 1; i < links.length; i++) {
+            tmp.next = new ListNode(links[i]);
             tmp = tmp.next;
-            tmp.val = link;
         }
         return head;
+    }
+
+    public static ListNode[] matrixToListNodeArray(int[][] matrix) {
+        if (matrix.length == 0) {
+            return null;
+        }
+        ListNode[] listNodes = new ListNode[matrix.length];
+        for (int i = 0; i < matrix.length; i++) {
+            listNodes[i] = arrToListNode(matrix[i]);
+        }
+        return listNodes;
     }
 }

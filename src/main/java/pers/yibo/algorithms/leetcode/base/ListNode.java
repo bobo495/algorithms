@@ -26,15 +26,12 @@ public class ListNode {
     @Override
     public String toString() {
         ListNode tmp = this;
-        if (tmp.next == null) {
-            return "[" + "]";
-        }
         StringBuilder out = new StringBuilder();
         out.append("[");
         while (tmp.next != null) {
-            tmp = tmp.next;
             out.append(tmp.val).append(",");
+            tmp = tmp.next;
         }
-        return out.deleteCharAt(out.length() - 1).append("]").toString();
+        return out.append(tmp.val).append("]").toString();
     }
 }
