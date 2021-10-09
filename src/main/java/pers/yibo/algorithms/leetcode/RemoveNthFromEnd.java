@@ -1,6 +1,7 @@
 package pers.yibo.algorithms.leetcode;
 
 import pers.yibo.algorithms.leetcode.base.ListNode;
+import pers.yibo.algorithms.leetcode.base.NodeUtils;
 
 import java.util.Objects;
 
@@ -34,11 +35,9 @@ public class RemoveNthFromEnd {
     }
 
     public static void main(String[] args) {
-        // 不能构建空链表
         int[] links = new int[]{1};
         int n = 1;
-        ListNode head = new ListNode(links);
-        System.out.println(head);
+        ListNode head = NodeUtils.arrToListNode(links);
         RemoveNthFromEnd r = new RemoveNthFromEnd();
         System.out.println(r.removeNthFromEnd(head, n));
     }

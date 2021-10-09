@@ -17,17 +17,6 @@ public class ListNode {
         this.val = val;
     }
 
-    public ListNode(int[] links) {
-        if (links.length == 0) {
-            return;
-        }
-        ListNode tmp = this;
-        for (int link : links) {
-            tmp.next = new ListNode();
-            tmp = tmp.next;
-            tmp.val = link;
-        }
-    }
 
     ListNode(int val, ListNode next) {
         this.val = val;
