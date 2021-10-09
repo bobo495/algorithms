@@ -46,6 +46,7 @@ public class MergeKLists {
         ListNode result = null;
         for (ListNode list : lists) {
             result = mergeTwoList(result, list);
+            System.out.println(result);
         }
 
         return result;
@@ -63,78 +64,80 @@ public class MergeKLists {
             return b;
         }
 
-        ListNode head = a;
+        if (b == null) {
+            return a;
+        }
 
+        ListNode headA = a;
+        ListNode headB = b;
         /*
         a: 1->4->5
-        b: 2->3->6
-        最终a: 1->2->3->4->5->6
+        b: -1->0->2->3->6
+        最终a: 0->1->2->3->4->5->6
         修改指针的场景：
         1. a.val<=b.val && a.next.val > b.val => a.next=b
         2. a.val> b.val && a.val <= b.next.val => b.next=a
+        3. a.val>b.val &&
          */
-        while (a.next != null && b.next != null) {
+        ListNode lastA = a;
+        boolean halfChanged = false;
+        while (a != null && b != null) {
             if (a.val <= b.val) {
-                if (a.next.val > b.val) {
-                    ListNode tmpA = a;
-                    a = a.next;
-                    tmpA.next = b;
+                if (a.next != null) {
+                    if (a.next.val > b.val) {
+                        ListNode tmpA = a;
+                        lastA = a;
+                        a = a.next;
+                        tmpA.next = b;
+                        halfChanged = true;
+                    } else {
+                        lastA = a;
+                        a = a.next;
+                    }
                 } else {
-                    a = a.next;
+                    a.next = b;
+                    return headA;
                 }
             } else {
-                if (a.val <= b.next.val) {
-                    ListNode tmpB = b;
-                    b = b.next;
-                    tmpB.next = a;
+                if (b.next != null) {
+                    if (a.val <= b.next.val) {
+                        if (headA == a) {
+                            headA = headB;
+                        }
+                        ListNode tmpB = b;
+                        b = b.next;
+                        tmpB.next = a;
+                    } else {
+                        b = b.next;
+                    }
                 } else {
-                    b = b.next;
+                    if (headA != lastA) {
+                        if (!halfChanged) {
+                            lastA.next = b;
+                        }
+                        b.next = a;
+                        break;
+                    } else {
+                        b.next = a;
+                        if (!halfChanged) {
+                            return headB;
+                        } else {
+                            return headA;
+                        }
+                    }
                 }
             }
         }
 
-
-        // todo 单向拼接处理
-        if (a.next == null && b.next != null) {
-            return addTail(head, b, a);
-        } else {
-            return addTail(head, a, b);
-        }
-    }
-
-    public ListNode addTail(ListNode head, ListNode l1, ListNode l2) {
-
-        ListNode tmpL1 = l1;
-        while (l1.next != null) {
-            if (l1.val > l2.val) {
-                tmpL1.next = l2;
-                l2.next = l1;
-                return head;
-            }
-            l1 = l1.next;
-        }
-
-        if (l1.val > l2.val) {
-            if (tmpL1.next != null) {
-                tmpL1.next = l2;
-                l2.next = l1;
-            } else {
-                l2.next = l1;
-                return l2;
-            }
-        } else {
-            l1.next = l2;
-        }
-        return head;
-
+        return headA;
     }
 
     public static void main(String[] args) {
 
 //        int[][] lists = new int[][]{{1, 4, 5}, {1, 3, 4}, {2, 6}};
 //        int[][] lists = new int[][]{{1}, {0}};
-        int[][] lists = new int[][]{{1, 2, 3}, {4, 5, 6, 7}};
-
+        int[][] lists = new int[][]{{-10, -6, -5}, {-9}};
+//        int[][] lists = new int[][]{{-10, -4, -3, -2, 1}, {-7, -7}};
         ListNode[] listNodes = NodeUtils.matrixToListNodeArray(lists);
         MergeKLists m = new MergeKLists();
         System.out.println(m.mergeKLists(listNodes));
