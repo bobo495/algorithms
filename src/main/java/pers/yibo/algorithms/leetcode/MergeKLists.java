@@ -43,21 +43,24 @@ public class MergeKLists {
             return null;
         }
 
-        ListNode left = null;
-        ListNode right = null;
-        int leftIndex = 0;
-        int rightIndex = lists.length - 1;
-        while (leftIndex < rightIndex) {
-            left = mergeTwoList(left, lists[leftIndex]);
-            right = mergeTwoList(right, lists[rightIndex]);
-            leftIndex++;
-            rightIndex--;
+        return iterateMerge(lists)[0];
+    }
+
+
+    public ListNode[] iterateMerge(ListNode[] lists) {
+        if (lists.length == 1) {
+            return lists;
         }
 
-        if (leftIndex == rightIndex) {
-            left = mergeTwoList(left, lists[leftIndex]);
+        ListNode[] subLists = new ListNode[(lists.length + 1) / 2];
+
+        for (int i = 0; i < lists.length - 1; i += 2) {
+            subLists[i / 2] = mergeTwoList(lists[i], lists[i + 1]);
         }
-        return mergeTwoList(left, right);
+        if (lists.length % 2 == 1) {
+            subLists[subLists.length - 1] = lists[lists.length - 1];
+        }
+        return iterateMerge(subLists);
     }
 
     /**
@@ -144,7 +147,7 @@ public class MergeKLists {
 
 //        int[][] lists = new int[][]{{1, 4, 5}, {1, 3, 4}, {2, 6}};
 //        int[][] lists = new int[][]{{1}, {0}};
-        int[][] lists = new int[][]{{-10, -6, -5}, {-9}};
+        int[][] lists = new int[][]{{-10, -6, -5}, {-9}, {4, 5}};
 //        int[][] lists = new int[][]{{-10, -4, -3, -2, 1}, {-7, -7}};
         ListNode[] listNodes = NodeUtils.matrixToListNodeArray(lists);
         MergeKLists m = new MergeKLists();
