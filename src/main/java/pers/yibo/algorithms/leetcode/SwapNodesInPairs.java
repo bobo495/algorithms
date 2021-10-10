@@ -1,6 +1,7 @@
 package pers.yibo.algorithms.leetcode;
 
 import pers.yibo.algorithms.leetcode.base.ListNode;
+import pers.yibo.algorithms.leetcode.base.NodeUtils;
 
 /**
  * 24. 两两交换链表中的节点
@@ -19,6 +20,34 @@ import pers.yibo.algorithms.leetcode.base.ListNode;
  */
 public class SwapNodesInPairs {
     public ListNode swapPairs(ListNode head) {
+        ListNode copy = head;
+        boolean isFirst = true;
+
+        ListNode lastTail = head;
+        while (copy != null && copy.next != null) {
+            ListNode second = copy.next;
+            copy.next = copy.next.next;
+            second.next = copy;
+            if (isFirst) {
+                head = second;
+                isFirst = false;
+            } else {
+                lastTail.next = second;
+            }
+            lastTail = copy;
+
+            copy = copy.next;
+        }
+
         return head;
     }
+
+    public static void main(String[] args) {
+        ListNode test = NodeUtils.arrToListNode(new int[]{1, 2, 3, 4});
+
+        SwapNodesInPairs s = new SwapNodesInPairs();
+
+        System.out.println(s.swapPairs(test));
+    }
+
 }
