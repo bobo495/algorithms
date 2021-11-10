@@ -9,7 +9,8 @@ import java.util.Arrays;
 public class Test {
     public static void main(String[] args) {
         int[] a = new int[]{1, 5, 7, 3, 9, 4, 8, 5, 6, 2};
-        Selection.sort(a);
+        SortFunction sortFunction = new Selection();
+        sortFunction.sort(a);
         System.out.println(Utils.isSorted(a));
         System.out.println(Arrays.toString(a));
     }
