@@ -15,11 +15,25 @@ public class Utils {
      * @param j   数组下标
      * @param <T> 可排序类型
      */
-    public static <T extends Comparable<T>> void exchange(T[] a, int i, int j) {
+    public static <T> void exchange(T[] a, int i, int j) {
         T tmp = a[i];
         a[i] = a[j];
         a[j] = tmp;
     }
+
+    /**
+     * 交换int数组a中a[i]和a[j]
+     *
+     * @param a int数组
+     * @param i 数组下标
+     * @param j 数组下标
+     */
+    public static void exchange(int[] a, int i, int j) {
+        int tmp = a[i];
+        a[i] = a[j];
+        a[j] = tmp;
+    }
+
 
     /**
      * 校验数组是否已排序
@@ -31,6 +45,21 @@ public class Utils {
     public static <T extends Comparable<T>> boolean isSorted(T[] a) {
         for (int i = 1; i < a.length; i++) {
             if (a[i].compareTo(a[i - 1]) < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 校验int数组是否已排序
+     *
+     * @param a int数组
+     * @return true-已排序，false-未排序
+     */
+    public static boolean isSorted(int[] a) {
+        for (int i = 1; i < a.length; i++) {
+            if (a[i] < a[i - 1]) {
                 return false;
             }
         }
