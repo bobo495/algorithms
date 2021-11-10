@@ -9,9 +9,16 @@ import java.util.Arrays;
 public class Test {
     public static void main(String[] args) {
         int[] a = new int[]{1, 5, 7, 3, 9, 4, 8, 5, 6, 2};
-        SortFunction sortFunction = new Selection();
-        sortFunction.sort(a);
-        System.out.println(sortFunction.isSorted(a));
+        SortFunction selection = new Selection();
+        selection.sort(a);
+        System.out.println(selection.isSorted(a));
         System.out.println(Arrays.toString(a));
+
+        a = new int[]{1, 5, 7, 3, 9, 4, 8, 5, 6, 2};
+        SortFunction insertion = new Insertion();
+        insertion.sort(a);
+        System.out.println(insertion.isSorted(a));
+        System.out.println(Arrays.toString(a));
+
     }
 }
