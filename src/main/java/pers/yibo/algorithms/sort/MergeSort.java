@@ -1,7 +1,6 @@
 package pers.yibo.algorithms.sort;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Comparator;
 
 /**
