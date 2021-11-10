@@ -28,7 +28,7 @@ public class Selection implements SortFunction {
                     min = j;
                 }
             }
-            Utils.exchange(a, i, min);
+            exchange(a, i, min);
         }
     }
 
@@ -41,7 +41,7 @@ public class Selection implements SortFunction {
                     min = j;
                 }
             }
-            Utils.exchange(a, i, min);
+            exchange(a, i, min);
         }
     }
 
@@ -54,7 +54,7 @@ public class Selection implements SortFunction {
                     min = j;
                 }
             }
-            Utils.exchange(a, i, min);
+            exchange(a, i, min);
         }
     }
 }

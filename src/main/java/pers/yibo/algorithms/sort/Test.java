@@ -11,7 +11,7 @@ public class Test {
         int[] a = new int[]{1, 5, 7, 3, 9, 4, 8, 5, 6, 2};
         SortFunction sortFunction = new Selection();
         sortFunction.sort(a);
-        System.out.println(Utils.isSorted(a));
+        System.out.println(sortFunction.isSorted(a));
         System.out.println(Arrays.toString(a));
     }
 }
