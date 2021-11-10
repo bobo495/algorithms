@@ -17,7 +17,7 @@ import java.util.Comparator;
  * @author yibo
  * @date 2021-11-09 17:43
  **/
-public class Selection implements SortFunction {
+public class SelectionSort implements SortFunction {
 
     @Override
     public <T extends Comparable<? super T>> void sort(T[] a) {
