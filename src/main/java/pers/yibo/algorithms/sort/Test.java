@@ -64,5 +64,12 @@ public class Test {
         quick3WaySort.sort(a);
         System.out.println(quick3WaySort.isSorted(a));
         System.out.println(Arrays.toString(a));
+
+        // 堆排序
+        b = new Integer[]{1, 5, 7, 3, 9, 4, 8, 5, 6, 2};
+        SortFunction heapSort = new HeapSort();
+        heapSort.sort(b);
+        System.out.println(heapSort.isSorted(b));
+        System.out.println(Arrays.toString(b));
     }
 }
