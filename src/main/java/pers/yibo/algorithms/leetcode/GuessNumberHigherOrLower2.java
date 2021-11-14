@@ -77,8 +77,8 @@ public class GuessNumberHigherOrLower2 {
     public static void main(String[] args) {
         GuessNumberHigherOrLower2 g = new GuessNumberHigherOrLower2();
         System.out.println(g.getMoneyAmount(130));
-        for (int i = 100; i < 110; i++) {
-            System.out.println(i + " " + g.rightMin(i, 130));
+        for (int i = 1; i <= 4; i++) {
+            System.out.println(i + " " + g.rightMin(i, 7));
         }
     }
 }
