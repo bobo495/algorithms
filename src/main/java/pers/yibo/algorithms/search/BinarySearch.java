@@ -1,4 +1,4 @@
-package pers.yibo.algorithms.fundamentals;
+package pers.yibo.algorithms.search;
 
 /**
  * 二分查找
