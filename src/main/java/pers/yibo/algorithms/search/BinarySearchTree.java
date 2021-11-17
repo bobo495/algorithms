@@ -79,6 +79,16 @@ public class BinarySearchTree<K extends Comparable<K>, V> {
     }
 
     /**
+     * 判断key是否存在
+     *
+     * @param key 待判断key
+     * @return true-存在，false-不存在
+     */
+    public boolean contains(K key) {
+        return get(key) != null;
+    }
+
+    /**
      * 查找key对应的value
      *
      * @param key key
