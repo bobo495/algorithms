@@ -1,7 +1,7 @@
 package pers.yibo.algorithms.search;
 
 /**
- * 红黑树-自平衡BST（二叉树形式表示的2-3树）
+ * 红黑树-自平衡BST（二叉树形式表示的2-3树）- {@link java.util.TreeMap}实现原理
  * <p>
  * 1. 红链接将两个2-节点连接起来构成一个3-节点
  * 2. 黑链接则为普通2-节点
