@@ -30,6 +30,21 @@ public class DepthFirstSearch {
     }
 
     /**
+     * 多点搜索（多点可达性问题）
+     *
+     * @param graph   指定图
+     * @param sources 搜索起点的集合
+     */
+    public DepthFirstSearch(Graph graph, Iterable<Integer> sources) {
+        marked = new boolean[graph.getVertices()];
+        for (int s : sources) {
+            if (!marked[s]) {
+                dfs(graph, s);
+            }
+        }
+    }
+
+    /**
      * 递归地访问它的所有没有被标记过的邻居顶点
      *
      * @param graph 指定图
