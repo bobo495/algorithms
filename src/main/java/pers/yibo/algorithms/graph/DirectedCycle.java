@@ -29,6 +29,11 @@ public class DirectedCycle {
     private final boolean[] onStack;
 
     public DirectedCycle(Graph graph) {
+
+        if (!(graph instanceof DirectedGraph)) {
+            throw new IllegalArgumentException("graph is not DirectedGraph!");
+        }
+
         this.marked = new boolean[graph.getVertices()];
         this.edgeTo = new int[graph.getVertices()];
         this.onStack = new boolean[graph.getVertices()];
