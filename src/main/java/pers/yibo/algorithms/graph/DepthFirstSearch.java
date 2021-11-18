@@ -2,7 +2,7 @@ package pers.yibo.algorithms.graph;
 
 /**
  * 深度优先搜索
- *
+ * <p>
  * 深度优先搜索标记与起点连通的所有顶点所需的时间和顶点的度数之和成正比。
  *
  * @author yibo
@@ -26,6 +26,7 @@ public class DepthFirstSearch {
      */
     public DepthFirstSearch(Graph graph, int s) {
         marked = new boolean[graph.getVertices()];
+        dfs(graph, s);
     }
 
     /**
