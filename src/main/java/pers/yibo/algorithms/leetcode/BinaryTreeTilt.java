@@ -16,17 +16,13 @@ public class BinaryTreeTilt {
             return 0;
         }
         tilt += sizeCount(node.left, tilt) + sizeCount(node.right, tilt);
-        if (node.left == null && node.right != null) {
-            node.val = node.val + node.right.val;
-            tilt += Math.abs(node.right.val);
-        } else if (node.right == null && node.left != null) {
-            node.val = node.val + node.left.val;
-            tilt += Math.abs(node.left.val);
-        } else if (node.right != null) {
-            node.val = node.val + node.left.val + node.right.val;
-            tilt += Math.abs(node.left.val - node.right.val);
-        }
+        node.val = getVal(node) + getVal(node.left) + getVal(node.right);
+        tilt += Math.abs(getVal(node.left) - getVal(node.right));
         return tilt;
+    }
+
+    public int getVal(TreeNode node) {
+        return node == null ? 0 : node.val;
     }
 
     class TreeNode {
