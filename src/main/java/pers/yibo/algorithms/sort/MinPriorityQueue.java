@@ -85,13 +85,13 @@ public class MinPriorityQueue<T extends Comparable<? super T>> {
     }
 
     /**
-     * 删除队列中值最大的元素
+     * 删除队列中值最小的元素
      *
      * @return this.priorityQueue[1]
      */
     public T delete() {
-        // 记录队列中的最大值
-        T max = this.priorityQueue[1];
+        // 记录队列中的最小值
+        T min = this.priorityQueue[1];
         // 将最大值换到队尾，并减少队列size
         this.priorityQueue[1] = this.priorityQueue[size--];
         // 将此时的队首元素下沉
@@ -99,7 +99,7 @@ public class MinPriorityQueue<T extends Comparable<? super T>> {
         if (size > 0 && size < capacity / 4) {
             resize(capacity / 2);
         }
-        return max;
+        return min;
     }
 
     /**
