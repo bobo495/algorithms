@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
- * 基于堆的优先队列
+ * 基于堆的优先队列 - 大顶堆
  * <p>
  * 思想：基于数组构建完全二叉树。保证二叉树的父节点永远大于子节点，不保证两个子节点的大小。
  * 每次添加元素时，从队尾添加，通过{@link MaxPriorityQueue#swim()}实现队尾元素上浮到正确位置；
