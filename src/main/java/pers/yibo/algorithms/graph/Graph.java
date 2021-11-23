@@ -1,7 +1,7 @@
 package pers.yibo.algorithms.graph;
 
 /**
- * 图的通用API
+ * 无权图的通用API
  * <p>
  * 定义顶点id为[0,顶点数-1]
  *
