@@ -2,6 +2,7 @@ package pers.yibo.algorithms.sort;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
@@ -12,7 +13,7 @@ import java.util.NoSuchElementException;
  * @author yibo
  * @date 2021-11-24 15:28
  **/
-abstract class AbstractIndexPriorityQueue<T extends Comparable<? super T>> implements Iterable<Integer> {
+abstract class AbstractIndexPriorityQueue<T extends Comparable<? super T>> implements IndexPriorityQueue<T> {
     /**
      * 默认初始容量为16
      */
@@ -71,6 +72,7 @@ abstract class AbstractIndexPriorityQueue<T extends Comparable<? super T>> imple
      *
      * @return true-empty
      */
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
@@ -80,6 +82,7 @@ abstract class AbstractIndexPriorityQueue<T extends Comparable<? super T>> imple
      *
      * @return 优先队列大小
      */
+    @Override
     public int size() {
         return this.size;
     }
@@ -90,6 +93,7 @@ abstract class AbstractIndexPriorityQueue<T extends Comparable<? super T>> imple
      * @param index 索引
      * @return true-存在，false-不存在
      */
+    @Override
     public boolean contains(int index) {
         validateIndex(index);
         return this.reverse[index] != -1;
@@ -101,6 +105,7 @@ abstract class AbstractIndexPriorityQueue<T extends Comparable<? super T>> imple
      * @param index 索引
      * @return 对应的值
      */
+    @Override
     public T get(int index) {
         if (!contains(index)) {
             throw new NoSuchElementException("index is not in the priority queue");
@@ -114,6 +119,7 @@ abstract class AbstractIndexPriorityQueue<T extends Comparable<? super T>> imple
      * @param index 索引
      * @param item  元素
      */
+    @Override
     public void put(int index, T item) {
         validateIndex(index);
         if (contains(index)) {
@@ -134,6 +140,7 @@ abstract class AbstractIndexPriorityQueue<T extends Comparable<? super T>> imple
      *
      * @param index 索引
      */
+    @Override
     public void delete(int index) {
         if (!contains(index)) {
             throw new NoSuchElementException("index is not in the priority queue");
@@ -151,10 +158,11 @@ abstract class AbstractIndexPriorityQueue<T extends Comparable<? super T>> imple
     }
 
     /**
-     * 获取优先队列的第一个元素(不删除)
+     * 获取优先队列的第一个元素的索引(不删除)
      *
      * @return this.priorityQueue[1]
      */
+    @Override
     public int peakIndex() {
         if (isEmpty()) {
             throw new NoSuchElementException("Priority queue underflow");
@@ -167,6 +175,7 @@ abstract class AbstractIndexPriorityQueue<T extends Comparable<? super T>> imple
      *
      * @return this.items[this.priorityQueue[1]]
      */
+    @Override
     public T peakItem() {
         if (isEmpty()) {
             throw new NoSuchElementException("Priority queue underflow");
@@ -175,10 +184,11 @@ abstract class AbstractIndexPriorityQueue<T extends Comparable<? super T>> imple
     }
 
     /**
-     * 弹出优先队列的第一个元素对应的索引（删除）
+     * 弹出优先队列的第一个元素，返回对应的索引（删除）
      *
      * @return this.priorityQueue[1]
      */
+    @Override
     public int pollIndex() {
         int firstIndex = this.priorityQueue[1];
         poll();
@@ -190,6 +200,7 @@ abstract class AbstractIndexPriorityQueue<T extends Comparable<? super T>> imple
      *
      * @return this.items[this.priorityQueue[1]]
      */
+    @Override
     public T pollItem() {
         T firstItem = this.items[this.priorityQueue[1]];
         poll();
@@ -277,6 +288,77 @@ abstract class AbstractIndexPriorityQueue<T extends Comparable<? super T>> imple
         }
         if (index >= this.capacity) {
             throw new IllegalArgumentException("index >= capacity: " + index);
+        }
+    }
+
+    /**
+     * 复制方法，用于遍历索引和items
+     *
+     * @return {@link IndexPriorityQueue}
+     */
+    abstract IndexPriorityQueue<T> copy();
+
+    @Override
+    public Iterator<Integer> getIndices() {
+        return new IndexIterator();
+    }
+
+    @Override
+    public Iterator<T> getItems() {
+        return new ItemIterator();
+    }
+
+    private class IndexIterator implements Iterator<Integer> {
+
+        private final IndexPriorityQueue<T> queue;
+
+        public IndexIterator() {
+            queue = copy();
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !queue.isEmpty();
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public Integer next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            return queue.pollIndex();
+        }
+    }
+
+    private class ItemIterator implements Iterator<T> {
+
+        private final IndexPriorityQueue<T> queue;
+
+        public ItemIterator() {
+            queue = copy();
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !queue.isEmpty();
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            return queue.pollItem();
         }
     }
 }
