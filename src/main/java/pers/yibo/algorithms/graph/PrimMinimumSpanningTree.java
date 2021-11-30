@@ -31,7 +31,7 @@ public class PrimMinimumSpanningTree {
      */
     private final MinIndexPriorityQueue<Double> pqEdges;
 
-    public PrimMinimumSpanningTree(UndirectedEdgeWeightedGraph graph) {
+    public PrimMinimumSpanningTree(WeightedUndirectedGraph graph) {
         this.marked = new boolean[graph.getVertices()];
         this.edgeTo = new UndirectedEdge[graph.getVertices()];
         this.distTo = new double[graph.getVertices()];
@@ -48,7 +48,7 @@ public class PrimMinimumSpanningTree {
         }
     }
 
-    private void visit(UndirectedEdgeWeightedGraph graph, int v) {
+    private void visit(WeightedUndirectedGraph graph, int v) {
         marked[v] = true;
         for (UndirectedEdge edge : graph.getAdjacencyVertices(v)) {
             int w = edge.other(v);

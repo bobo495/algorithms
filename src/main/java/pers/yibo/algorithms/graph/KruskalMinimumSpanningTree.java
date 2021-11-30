@@ -17,7 +17,7 @@ import java.util.Queue;
 public class KruskalMinimumSpanningTree {
     Queue<UndirectedEdge> mstEdges;
 
-    public KruskalMinimumSpanningTree(UndirectedEdgeWeightedGraph graph) {
+    public KruskalMinimumSpanningTree(WeightedUndirectedGraph graph) {
         mstEdges = new LinkedList<>();
 
         // 用加权无向图的所有边构建最小优先队列

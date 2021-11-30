@@ -8,7 +8,7 @@ import pers.yibo.algorithms.fundamentals.Bag;
  * @author yibo
  * @date 2021-11-23 14:30
  **/
-public class UndirectedEdgeWeightedGraph {
+public class WeightedUndirectedGraph {
 
     /**
      * 顶点数
@@ -26,7 +26,7 @@ public class UndirectedEdgeWeightedGraph {
     private final Bag<UndirectedEdge>[] adjacencyList;
 
     @SuppressWarnings("unchecked")
-    public UndirectedEdgeWeightedGraph(int vertices) {
+    public WeightedUndirectedGraph(int vertices) {
         this.vertices = vertices;
         adjacencyList = (Bag<UndirectedEdge>[]) new Bag[vertices];
         for (int i = 0; i < vertices; i++) {

@@ -43,7 +43,7 @@ public class LazyPrimMinimumSpanningTree {
      *
      * @param graph 加权无向图
      */
-    public LazyPrimMinimumSpanningTree(UndirectedEdgeWeightedGraph graph) {
+    public LazyPrimMinimumSpanningTree(WeightedUndirectedGraph graph) {
         this.marked = new boolean[graph.getVertices()];
         this.mstEdges = new LinkedList<>();
         this.pqEdges = new PriorityQueue<>();
@@ -78,7 +78,7 @@ public class LazyPrimMinimumSpanningTree {
      * @param graph 图
      * @param v     顶点
      */
-    private void visit(UndirectedEdgeWeightedGraph graph, int v) {
+    private void visit(WeightedUndirectedGraph graph, int v) {
         marked[v] = true;
         for (UndirectedEdge edge : graph.getAdjacencyVertices(v)) {
             if (!marked[edge.other(v)]) {
