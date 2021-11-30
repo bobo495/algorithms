@@ -9,9 +9,9 @@ import java.util.StringJoiner;
  * 2021/11/30 20:00
  */
 public class DirectedEdge implements Comparable<DirectedEdge> {
-    private int from;
-    private int to;
-    private double weight;
+    private final int from;
+    private final int to;
+    private final double weight;
 
     public DirectedEdge(int from, int to, double weight) {
         if (from < 0) {
