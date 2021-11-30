@@ -70,6 +70,37 @@ public class DepthFirstOrder {
         reversePost.push(v);
     }
 
+    public DepthFirstOrder(WeightedDirectedGraph graph) {
+
+        this.marked = new boolean[graph.getVertices()];
+        this.pre = new LinkedList<>();
+        this.post = new LinkedList<>();
+        this.reversePost = new Stack<>();
+
+        for (int v = 0; v < graph.getVertices(); v++) {
+            if (!marked[v]) {
+                dfs(graph, v);
+            }
+        }
+    }
+
+    private void dfs(WeightedDirectedGraph graph, int v) {
+        // 遍历顺序
+        pre.add(v);
+
+        marked[v] = true;
+        for (DirectedEdge edge : graph.getAdjacencyVertices(v)) {
+            if (!marked[edge.to()]) {
+                dfs(graph, edge.to());
+            }
+        }
+
+        // 每条路径的末尾
+        post.add(v);
+        reversePost.push(v);
+    }
+
+
     public Iterable<Integer> pre() {
         return pre;
     }
