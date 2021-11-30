@@ -24,6 +24,16 @@ public class Topological {
         order = dfo.reversePost();
     }
 
+    public Topological(WeightedDirectedGraph graph) {
+        WeightedDirectedCycle cycle = new WeightedDirectedCycle(graph);
+        if (cycle.hasCycle()) {
+            throw new IllegalArgumentException("Graph is not DAG, cycle is: " + cycle.getCycle());
+        }
+
+        DepthFirstOrder dfo = new DepthFirstOrder(graph);
+        order = dfo.reversePost();
+    }
+
     public Iterable<Integer> order() {
         return order;
     }
