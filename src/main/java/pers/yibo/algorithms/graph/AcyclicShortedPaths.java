@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * 无环加权有向图的最短路径算法
- *
+ * <p>
  * 按照拓扑顺序放松顶点，就能在和 E+V 成正比的时间内解决无环加权有向图的单点最 短路径问题。
  *
  * @author yibo
@@ -22,18 +22,17 @@ public class AcyclicShortedPaths {
      */
     double[] distTo;
 
-    public AcyclicShortedPaths(WeightedDirectedGraph graph){
+    public AcyclicShortedPaths(WeightedDirectedGraph graph) {
         this.edgeTo = new DirectedEdge[graph.getVertices()];
         this.distTo = new double[graph.getVertices()];
         // 初始化权重为最大值
         Arrays.fill(distTo, Double.MAX_VALUE);
 
-        Topological topological=new Topological(graph);
-        for(int v:topological.order()){
-            relax(graph,v);
+        Topological topological = new Topological(graph);
+        for (int v : topological.order()) {
+            relax(graph, v);
         }
     }
-
 
     /**
      * 顶点的松弛
