@@ -99,11 +99,7 @@ public class TrieSearchTree<V> {
      * @return true-包含，false-不包含
      */
     private boolean contains(String key) {
-        Node<V> node = get(root, key, 0);
-        if (node == null) {
-            return false;
-        }
-        return node.value != null;
+        return get(key) != null;
     }
 
     public void put(String key, V value) {
@@ -293,6 +289,9 @@ public class TrieSearchTree<V> {
         System.out.println("test get: " + searchTree.get("shell"));
         System.out.println("test get: " + searchTree.get("shel"));
         System.out.println("test get: " + searchTree.get("ael"));
+        System.out.println("test contains: " + searchTree.contains("short"));
+        System.out.println("test contains: " + searchTree.contains("the"));
+        System.out.println("test contains: " + searchTree.contains("anda"));
         System.out.println("========================");
         // 输出size和所有key
         System.out.println("test size:" + searchTree.size());
