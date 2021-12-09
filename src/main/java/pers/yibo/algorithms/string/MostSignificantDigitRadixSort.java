@@ -6,6 +6,8 @@ import java.util.Arrays;
  * MSD基数排序-高位优先的字符串排序
  * <p>
  * 实现一个通用的字符串排序算法（字符串的长度不一定相同），我们应该考虑从左向右遍历 所有字符。
+ * <p>
+ * LSD is faster than MSD when there is a fixed length. MSD is too slow for small files, and it need huge number of recursive calls on small files.
  *
  * @author yibo
  * @date 2021-12-09 11:55
