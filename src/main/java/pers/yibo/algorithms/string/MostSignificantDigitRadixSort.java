@@ -22,7 +22,7 @@ public class MostSignificantDigitRadixSort {
      * <p>
      * 数组长度小于等于16时，使用插入排序
      */
-    private static final int CUTOFF = 2;
+    private static final int CUTOFF = 15;
 
     private static void sort(String[] arr) {
         String[] aux = new String[arr.length];
