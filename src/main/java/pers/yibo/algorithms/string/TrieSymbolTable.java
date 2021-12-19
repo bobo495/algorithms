@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * 单词查找树
+ * 基于单词查找树的符号表
  * <p>
  * 键值对：key为单词，value为单词对应的值
  * <p>
@@ -20,7 +20,7 @@ import java.util.Queue;
  * @author yibo
  * 2021/12/9 20:36
  */
-public class TrieSearchTree<V> {
+public class TrieSymbolTable<V> {
     /**
      * 字母表基数
      */
@@ -272,7 +272,7 @@ public class TrieSearchTree<V> {
     }
 
     public static void main(String[] args) {
-        TrieSearchTree<Integer> searchTree = new TrieSearchTree<>();
+        TrieSymbolTable<Integer> searchTree = new TrieSymbolTable<>();
         // 测试put
         searchTree.put("shell", 1);
         searchTree.put("shells", 2);
