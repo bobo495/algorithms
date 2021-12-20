@@ -22,6 +22,16 @@ public class KnuthMorrisPratt {
 
     /**
      * 确定有限状态自动机 - Deterministic Finite Automaton
+     * <p>
+     * 初始化dfa矩阵，行为字符集数量，列为pattern长度。
+     * <p>
+     * dfa[i][j]表示匹配到字符i时，匹配了pattern的多少个字符，
+     * <p>
+     * 值为0说明匹配失败并从头开始匹配，为j+1说明正常递增匹配；
+     * <p>
+     * 为patter.length()说明匹配完成，找到符合条件的字符串；
+     * <p>
+     * 为(0,j+1)之间，说明需要回退到dfa[i][j]的位置
      */
     private final int[][] dfa;
 
@@ -67,20 +77,22 @@ public class KnuthMorrisPratt {
      * @param pattern 待匹配字符串
      */
     private void initDfa(String pattern) {
-        // 初始化第一个字符
+        // 初始化pattern首字母
         dfa[pattern.charAt(0)][0] = 1;
-        for (int x = 0, j = 1; j < patternLength; j++) {
-            // 不匹配的情况
+        // 从j=1开始，更新dfa
+        for (int x = 0, j = 1; j < pattern.length(); j++) {
+            // 将需要回退的列的结果复制到第j列
             for (int c = 0; c < radix; c++) {
                 dfa[c][j] = dfa[c][x];
             }
-            // 匹配的情况
+            // 匹配到第j个字符时，匹配正确则设置为j+1
             dfa[pattern.charAt(j)][j] = j + 1;
-            // 更新重启状态
+            // 找到当前回退的列
             int before = x;
             x = dfa[pattern.charAt(j)][x];
             System.out.println("j : " + j + " , x before : " + before + " , after : " + x);
         }
+
         System.out.println("======== dfa: " + pattern + " =========");
         for (int i = 0; i < this.radix; i++) {
             for (int n : dfa[i]) {
