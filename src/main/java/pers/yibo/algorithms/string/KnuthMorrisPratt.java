@@ -56,9 +56,13 @@ public class KnuthMorrisPratt {
     /**
      * 初始化dfa
      * <p>
-     * 1. 匹配失败时：将 dfa[][X] 复制到 dfa[][j]
+     * 1. 匹配失败时：将 dfa[][X] 复制到 dfa[][j]（回退到x，即pattern[0-x]为重复字段）
+     * <p>
      * 2. 匹配成功时：将 dfa[pat.charAt(j)][j] 设为 j+1
-     * 3. 更新x：当前字符匹配失败后回退的位置
+     * <p>
+     * 3. 更新x：x的第一次更新在与pattern[0]重复的位置，随着x增加，说明当前子字符串与pattern[0]开始的子字符串相同
+     * <p>
+     * 例如ABABAC，当j=5时，匹配到了ABABAB，则仅需回退到j=3的地方(保留ABAB)，此时x=3，即将x=3的结果复制到当前值
      *
      * @param pattern 待匹配字符串
      */
@@ -75,7 +79,7 @@ public class KnuthMorrisPratt {
             // 更新重启状态
             int before = x;
             x = dfa[pattern.charAt(j)][x];
-            System.out.println(before + " " + x);
+            System.out.println("j : " + j + " , x before : " + before + " , after : " + x);
         }
         System.out.println("======== dfa: " + pattern + " =========");
         for (int i = 0; i < this.radix; i++) {
@@ -119,6 +123,8 @@ public class KnuthMorrisPratt {
     }
 
     public static void main(String[] args) {
+        KnuthMorrisPratt kmp4 = new KnuthMorrisPratt("abcabdabe");
+        KnuthMorrisPratt kmp3 = new KnuthMorrisPratt("ababac");
         KnuthMorrisPratt kmp = new KnuthMorrisPratt("ababababa");
         System.out.println(kmp.search("aabbababababaad"));
         KnuthMorrisPratt kmp2 = new KnuthMorrisPratt("dasgwgadg");
