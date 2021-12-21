@@ -63,7 +63,7 @@ public class DepthFirstSearch {
         }
     }
 
-    public boolean marked(Graph graph, int v) {
+    public boolean marked(int v) {
         return marked[v];
     }
 
