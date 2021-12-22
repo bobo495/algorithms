@@ -80,6 +80,10 @@ public class DirectedGraph implements Graph {
         StringBuilder s = new StringBuilder();
         s.append(vertices).append(" vertices, ").append(edges).append(" edges \n");
         for (int v = 0; v < vertices; v++) {
+            if (adjacencyList[v].isEmpty()) {
+                // 空邻接表不输出
+                continue;
+            }
             s.append(v).append(": ");
             for (int w : adjacencyList[v]) {
                 s.append(w).append(" ");
