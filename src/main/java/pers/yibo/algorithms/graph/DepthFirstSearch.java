@@ -56,7 +56,7 @@ public class DepthFirstSearch {
         count++;
         // 检索该点的邻接点集
         for (int w : graph.getAdjacencyVertices(v)) {
-            if (!marked[v]) {
+            if (!marked[w]) {
                 // 找到未被标记的邻接点，继续往下搜索
                 dfs(graph, w);
             }
