@@ -86,6 +86,8 @@ public class NondeterministicFiniteAutomaton {
             }
         }
 
+        System.out.println(graph);
+
         if (operators.size() > 0) {
             throw new IllegalArgumentException("Invalid regular expression");
         }
@@ -93,6 +95,7 @@ public class NondeterministicFiniteAutomaton {
 
     public boolean recognizes(String text) {
         DepthFirstSearch dfs = new DepthFirstSearch(graph, 0);
+        // 记录当前可达点的列表
         Bag<Integer> pc = new Bag<>();
         for (int v = 0; v < graph.getVertices(); v++) {
             if (dfs.marked(v)) {
@@ -108,27 +111,34 @@ public class NondeterministicFiniteAutomaton {
             }
 
             Bag<Integer> match = new Bag<>();
+            // 从当前可达点中检索是否符合匹配的点，符合匹配的点的下一个状态记录到match中
             for (int v : pc) {
                 if (v == m) {
                     continue;
                 }
                 if (regexp.charAt(v) == text.charAt(i) || regexp.charAt(v) == '.') {
+                    // v为已经到达的点，v+1为该点的下一个状态
                     match.add(v + 1);
                 }
             }
-            dfs = new DepthFirstSearch(graph, match);
+            // 初始化可达点
             pc = new Bag<>();
+            // 从匹配的点开始进行多点搜索，找到下一步可达点并记录到pc中
+            dfs = new DepthFirstSearch(graph, match);
             for (int v = 0; v < graph.getVertices(); v++) {
                 if (dfs.marked(v)) {
+                    // 找到的点添加到pc中
                     pc.add(v);
                 }
             }
 
+            // 下一步可达点为空，说明无匹配结果，返回空
             if (pc.size() == 0) {
                 return false;
             }
         }
 
+        // text扫描完成后，正好到达了接受状态，说明匹配成功
         for (int v : pc) {
             if (v == m) {
                 return true;
