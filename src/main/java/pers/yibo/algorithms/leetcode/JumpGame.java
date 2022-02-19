@@ -5,15 +5,33 @@ import java.util.Queue;
 
 /**
  * 55. 跳跃游戏
+ * <p>
+ * https://leetcode-cn.com/problems/jump-game/
  *
  * @author yibo
  * 2022/2/19 10:04
  */
 public class JumpGame {
     /**
-     * 广度搜索
+     * 每一步可达的最大值
      */
     public boolean canJump(int[] nums) {
+        int max = nums[0];
+        for (int i = 0; i <= max; i++) {
+            if (nums[i] + i >= nums.length - 1) {
+                return true;
+            }
+            if (nums[i] + i > max) {
+                max = nums[i] + i;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 广度搜索
+     */
+    public boolean canJump2(int[] nums) {
 
         boolean[] marked = new boolean[nums.length];
         Queue<Integer> queue = new LinkedList<>();
